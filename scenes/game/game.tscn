@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://dln73de0hoaw"]
+
+[ext_resource type="Texture2D" uid="uid://lsi83ry3043n" path="res://assets/background/rocks_2.png" id="1_eyhe6"]
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_gdyey"]
+[ext_resource type="PackedScene" uid="uid://dmuh76kjo7qbb" path="res://scenes/plane/plane.tscn" id="2_qh16e"]
+[ext_resource type="PackedScene" uid="uid://cqvyik3qnx4uo" path="res://scenes/barrier/barrier.tscn" id="3_ho7mg"]
+[ext_resource type="PackedScene" uid="uid://btsjiqtq2vdne" path="res://scenes/pipes/pipes.tscn" id="4_2twfr"]
+[ext_resource type="PackedScene" uid="uid://cyd1lsxtvrfnm" path="res://scenes/hud/hud.tscn" id="6_2wgyh"]
+[ext_resource type="PackedScene" uid="uid://kvqhapct44ox" path="res://scenes/gameover/game_over.tscn" id="7_cy0vi"]
+[ext_resource type="PackedScene" uid="uid://o5xmvusc8sgv" path="res://scenes/scrolling_bg/scrolling_bg.tscn" id="8_yoqrk"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_gdyey")
+pipes_scene = ExtResource("4_2twfr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(231, 313)
+texture = ExtResource("1_eyhe6")
+
+[node name="Plane" parent="." instance=ExtResource("2_qh16e")]
+position = Vector2(77, 366)
+
+[node name="Barrier" parent="." instance=ExtResource("3_ho7mg")]
+
+[node name="Floor" parent="." instance=ExtResource("3_ho7mg")]
+position = Vector2(4, 1281)
+
+[node name="PipesHolder" type="Node" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 1.6
+autostart = true
+
+[node name="SpawnU" type="Marker2D" parent="."]
+position = Vector2(540, 200)
+
+[node name="SpawnL" type="Marker2D" parent="."]
+position = Vector2(540, 540)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("6_2wgyh")]
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("7_cy0vi")]
+
+[node name="ScrollingBg" parent="." instance=ExtResource("8_yoqrk")]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

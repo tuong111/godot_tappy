@@ -1,0 +1,11 @@
+res://scenes/main/main.tscn
+res://singletons/game_manager.gd
+res://scenes/hud/hud.tscn
+res://scenes/gameover/game_over.tscn
+res://scenes/plane/plane.tscn
+res://scenes/pipe/pipe.tscn
+res://scenes/laser/laser.tscn
+res://scenes/pipes/pipes.tscn
+res://scenes/game/game.tscn
+res://scenes/scrolling_bg/scrolling_bg.tscn
+res://scenes/srcolling_layer/srcolling_layer.tscn

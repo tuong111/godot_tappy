@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=3 uid="uid://cj1wg1doinbsd"]
+
+[ext_resource type="LabelSettings" uid="uid://biw1b4bfkij72" path="res://assets/sh_72_title.tres" id="1_lp76j"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_mrnmd"]
+[ext_resource type="Texture2D" uid="uid://u2gekwr10jvo" path="res://assets/background/sky.png" id="1_t55ak"]
+[ext_resource type="FontFile" uid="uid://c6e1jdwbntlwa" path="res://assets/fonts/Skranji-Bold.ttf" id="3_nnp8q"]
+[ext_resource type="LabelSettings" uid="uid://cdcjm5nhybblc" path="res://assets/sh_32.tres" id="3_w8qny"]
+[ext_resource type="AudioStream" uid="uid://dq7hgqqrkc5lt" path="res://assets/audio/bgm_menu.mp3" id="6_uof8x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8mau4"]
+font = ExtResource("3_nnp8q")
+font_size = 60
+outline_size = 5
+outline_color = Color(0.662745, 0.960784, 0.968627, 1)
+
+[sub_resource type="Animation" id="Animation_mj2bv"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MC/PressSpace:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5xd7b"]
+_data = {
+"flash": SubResource("Animation_mj2bv")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mrnmd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_t55ak")
+expand_mode = 1
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 24
+
+[node name="Title" type="Label" parent="MC"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Tappy 
+Plane"
+label_settings = ExtResource("1_lp76j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressSpace" type="Label" parent="MC"]
+layout_mode = 2
+text = "Tap To 
+Play"
+label_settings = SubResource("LabelSettings_8mau4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HsText" type="Label" parent="MC"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "High Score"
+label_settings = ExtResource("3_w8qny")
+vertical_alignment = 1
+
+[node name="HsScore" type="Label" parent="MC"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "000"
+label_settings = ExtResource("3_w8qny")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5xd7b")
+}
+autoplay = "flash"
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_uof8x")
+autoplay = true
